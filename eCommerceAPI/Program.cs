@@ -1,27 +1,32 @@
+using eCommerce.Infrastructure;
 using eCommerce.Core;
-using eCommerceAPI.Middlewares;
-
+using eCommerce.API.Middlewares;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Infrastructure service.
+//Add Infrastructure services
 builder.Services.AddInfrastructure();
 builder.Services.AddCore();
 
-//Add controllers to the service collection
-builder.Services.AddControllers();
+// Add controllers to the service collection
+builder.Services.AddControllers().AddJsonOptions(options => {
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
+//Build the web application
 var app = builder.Build();
 
 app.UseExceptionHandlingMiddleware();
-//Route incoming HTTP requests to the appropriate controllers
+
+//Routing
 app.UseRouting();
 
-//authentication and authorization middleware
+//Auth
 app.UseAuthentication();
 app.UseAuthorization();
 
-//controller routes
+//Controller routes
 app.MapControllers();
 
 app.Run();

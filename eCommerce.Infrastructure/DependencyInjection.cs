@@ -2,21 +2,21 @@
 using eCommerce.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace eCommerce.Core;
+namespace eCommerce.Infrastructure;
 
 public static class DependencyInjection
 {
     /// <summary>
-    /// Extension method to add core services to the dependency injection container
+    /// Extension method to add infrastructure services to the dependency injection container
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static  IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         //TO DO: Add services to the IoC container
-        //Core services often include data access, caching and other low-level components
-       services.AddScoped<IUsersRepository,UsersRepository>();
+        //Infrastructure services often include data access, caching and other low-level components.
 
+        services.AddTransient<IUsersRepository, UsersRepository>();
         return services;
     }
 }

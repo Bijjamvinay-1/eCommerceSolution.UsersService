@@ -24,14 +24,14 @@ internal class UsersService : IUsersService
             return null;
         }
 
-        return new AuthenticationResponse(user.UserID, user.Email, user.PersonName, user.Gender, "token", Sucess: true);
+        return new AuthenticationResponse(user.UserID, user.Email, user.PersonName, user.Gender, "token", Sucess : true);
     }
 
 
     public async Task<AuthenticationResponse?> Register(RegisterRequest registerRequest)
     {
         //Create a new ApplicationUser object from RegisterRequest
-        ApplicationUser user = new()
+        ApplicationUser user = new ApplicationUser()
         {
             PersonName = registerRequest.PersonName,
             Email = registerRequest.Email,
