@@ -1,6 +1,8 @@
 eCommerceSolution.UsersService
 User Management Microservice for an eCommerce platform built using ASP.NET Core Web API, following Clean Architecture and Microservices Architecture principles.
 
+<img width="873" height="758" alt="image" src="https://github.com/user-attachments/assets/69452729-73b4-44a7-acc4-a7aba76ac170" />
+
 📂 Project Structure
 eCommerceSolution.UsersService
 │
