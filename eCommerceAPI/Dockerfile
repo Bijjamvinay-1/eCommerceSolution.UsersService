@@ -9,15 +9,15 @@ EXPOSE 9091
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["eCommerce.API/eCommerce.API.csproj", "eCommerce.API/"]
-RUN dotnet restore "./eCommerce.API/./eCommerce.API.csproj"
+COPY ["eCommerceAPI/eCommerceAPI.csproj", "eCommerceAPI/"]
+RUN dotnet restore "./eCommerceAPI/./eCommerceAPI.csproj"
 COPY . .
-WORKDIR "/src/eCommerce.API"
-RUN dotnet build "./eCommerce.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/eCommerceAPI"
+RUN dotnet build "./eCommerceAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./eCommerce.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./eCommerceAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
@@ -27,4 +27,4 @@ ENV POSTGRES_PASSWORD=Vinay7771
 ENV POSTGRES_DATABASE=eCommerceUsers
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PORT=5432
-ENTRYPOINT ["dotnet", "eCommerce.API.dll"]
+ENTRYPOINT ["dotnet", "eCommerceAPI.dll"]
